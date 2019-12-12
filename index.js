@@ -1,6 +1,5 @@
 var Mongoose = require('mongoose');
 Mongoose.Promise = require('bluebird');
-var Connection = Mongoose.connection;
 var model = require('./models');
 var db = function getConnection(uri, port, dbName) {
 

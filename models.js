@@ -1,7 +1,7 @@
 var modelMap = new Map()
 var Mongoose = require('mongoose')
 var Schema = Mongoose.Schema;
-const dao = require('../daos/index');
+const dao = require('./index');
 var contextService = require('request-context');
 
 exports.getModel = function (collectionName) {
