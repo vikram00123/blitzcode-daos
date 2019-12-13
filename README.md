@@ -1,6 +1,6 @@
 # blitzcode-daos
 
---app.js
+# --app.js
   
 var middleware = require('request-context').middleware;
 
@@ -12,6 +12,6 @@ const routes = require('./api/routes');
 
 app.use(middleware('namespace:currDb'));
 
---middleware/accesscontrol.service.js
+# --middleware/accesscontrol.service.js
 
 dao.model.setConnection(res.user.companyCode ? res.user.companyCode : 'salesTeamTrackingDB');
