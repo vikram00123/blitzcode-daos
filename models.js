@@ -3,6 +3,7 @@ var Mongoose = require('mongoose')
 var Schema = Mongoose.Schema;
 const dao = require('./index');
 var contextService = require('request-context');
+var textSearch = require('mongoose-text-search');
 
 exports.getModel = function (collectionName) {
 
@@ -25,6 +26,20 @@ exports.getModel = function (collectionName) {
         return schema;
     }
 
+}
+
+exports.getIndexModel = function (collectionName, fields) {
+    let connection = exports.getConnection();
+    if (connection) {
+        var UserSchema = new Schema(
+            { any: Schema.Types.Mixed }
+        );
+        UserSchema.plugin(textSearch);
+        UserSchema.index(fields, { name: 'search' });
+
+        var User = connection.model(collectionName, UserSchema, collectionName);
+        return User;
+    }
 }
 
 exports.getConnection = function () {

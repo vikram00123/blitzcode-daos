@@ -366,5 +366,21 @@ exports.findOneAndUpdate = function (collectionName, criteria, updateDoc) {
 
   })
 }
+
+exports.createTextSearchIndex = function (collectionName, fields) {
+
+  return new Promise(function (resolve, reject) {
+
+    var User = model.getIndexModel(collectionName, fields);
+    User.create({ naem: 'search' }, function (err, res) {
+      if (err)
+        reject(err)
+      else
+        resolve(res)
+    });
+
+  })
+}
+
 exports.db = db;
 exports.model = model;

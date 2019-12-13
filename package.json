@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/vikram00123/blitzcode-daos#readme",
   "dependencies": {
+    "mongoose-text-search": "0.0.2",
     "request-context": "^2.0.0"
   }
 }
