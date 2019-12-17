@@ -59,7 +59,9 @@ exports.setConnection = function (dbName) {
 
 
 exports.setForcedConnection = function (dbName) {
-
-    contextService.set('namespace:currDb', { connection: dao.db("142.93.212.122", "52031", dbName) });
-    modelMap.clear();
+    let connection = contextService.get('namespace:currDb.connection');
+    if (!connection || connection.name != dbName) {
+        contextService.set('namespace:currDb', { connection: dao.db("142.93.212.122", "52031", dbName) });
+        modelMap.clear();
+    }
 }

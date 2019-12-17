@@ -1,10 +1,20 @@
 var Mongoose = require('mongoose');
 Mongoose.Promise = require('bluebird');
 var model = require('./models');
+var connectionMap = new Map()
 var db = function getConnection(uri, port, dbName) {
 
-  return Mongoose.createConnection(
-    'mongodb://' + uri + ':' + port + '/' + dbName);
+  let connection = connectionMap.get(dbName)
+  if (!connection) {
+
+    connection = Mongoose.createConnection(
+      'mongodb://' + uri + ':' + port + '/' + dbName);
+    connectionMap.set(dbName, connection)
+
+  }
+
+  return connection;
+
 }
 
 //var gfs = Grid(Mongoose.mongo.Db, Mongoose.mongo);
@@ -372,7 +382,7 @@ exports.createTextSearchIndex = function (collectionName, fields) {
   return new Promise(function (resolve, reject) {
 
     var User = model.getIndexModel(collectionName, fields);
-    User.create(function (err, res) {
+    User.create({ naem: 'search' }, function (err, res) {
       if (err)
         reject(err)
       else
