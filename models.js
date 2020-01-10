@@ -48,20 +48,20 @@ exports.getConnection = function () {
 }
 
 
-exports.setConnection = function (dbName) {
+exports.setConnection = function (dbName, ip, port) {
     let connection = contextService.get('namespace:currDb.connection');
     if (!connection) {
-        contextService.set('namespace:currDb', { connection: dao.db("142.93.212.122", "52031", dbName) });
+        contextService.set('namespace:currDb', { connection: dao.db(ip, port, dbName) });
         modelMap.clear();
     }
 
 }
 
 
-exports.setForcedConnection = function (dbName) {
+exports.setForcedConnection = function (dbName, ip, port) {
     let connection = contextService.get('namespace:currDb.connection');
     if (!connection || connection.name != dbName) {
-        contextService.set('namespace:currDb', { connection: dao.db("142.93.212.122", "52031", dbName) });
+        contextService.set('namespace:currDb', { connection: dao.db(ip, port, dbName) });
         modelMap.clear();
     }
 }
